@@ -33,18 +33,17 @@ class BoggleChecker
       @queue = [start_position]
       @word_buffer = ""
 
-      if find_possible_word?(0)
-        response[:exist] = true
-        response[:start_position] = start_position
+      next unless find_possible_word?(0)
+      response[:exist] = true
+      response[:start_position] = start_position
 
-        return response
-      end
+      return response
     end
   end
 
   def find_possible_word?(query_index)
     if query_index >= query.size
-      return @word_buffer.size >= 3 && BoggleDictionary.exists?(@word_buffer.downcase)
+      @word_buffer.size >= 3 && BoggleDictionary.exists?(@word_buffer.downcase)
     else
       x, y = @queue.last
       current_char = query[query_index]
@@ -54,12 +53,12 @@ class BoggleChecker
         @visited_indexes << [x, y]
         @queue.pop
 
-        neighbors_of(x, y).each { |neighbor| @queue = [neighbor] + @queue if !@visited_indexes.include?(neighbor) }
+        neighbors_of(x, y).each { |neighbor| @queue = [neighbor] + @queue unless @visited_indexes.include?(neighbor) }
 
         find_possible_word?(query_index + 1)
       else
         @queue.pop
-        return false if @queue.size == 0
+        return false if @queue.empty?
         find_possible_word?(query_index)
       end
     end

@@ -3,9 +3,7 @@ class Boggle < ApplicationRecord
   validate :correct_input_data
 
   def correct_input_data
-    if data.size != 16
-      errors.add(:data, "Incorrect input data.")
-    end
+    errors.add(:data, "Incorrect input data.") if data.size != 16
   end
 
   def board

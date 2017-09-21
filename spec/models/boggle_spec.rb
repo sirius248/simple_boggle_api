@@ -5,8 +5,8 @@ RSpec.describe Boggle, type: :model do
   let(:board) {
     [
       ["T", "A", "P", "*"],
-      ["E", "A", "K", "S"],
-      ["O", "B", "R", "S"],
+      %w[E A K S],
+      %w[O B R S],
       ["S", "*", "X", "D"]
     ]
   }

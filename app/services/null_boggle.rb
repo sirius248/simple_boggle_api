@@ -1,6 +1,5 @@
 class NullBoggle
-  def initialize
-  end
+  def initialize; end
 
   def board
     board = Array.new(4) { Array.new(4) }

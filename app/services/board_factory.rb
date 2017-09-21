@@ -13,7 +13,7 @@ class BoardFactory
   def create
     (0..3).each do |i|
       (0..3).each do |j|
-        @board[i][j] = data[4*i+j]
+        @board[i][j] = data[4 * i + j]
       end
     end
     @board

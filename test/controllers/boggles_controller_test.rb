@@ -5,5 +5,4 @@ class BogglesControllerTest < ActionDispatch::IntegrationTest
     get boggles_current_board_url
     assert_response :success
   end
-
 end
