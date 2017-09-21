@@ -45,4 +45,4 @@ bundle exec rspec
 * Add more meaningfull test case
 
 ## Screenshots
-![1](https://user-images.githubusercontent.com/2282642/30710069-89c5a7b6-9f2e-11e7-87b0-d2ec8675ede8.png | width=300)
+![1](https://user-images.githubusercontent.com/2282642/30710069-89c5a7b6-9f2e-11e7-87b0-d2ec8675ede8.png?s=200)
