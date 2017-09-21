@@ -1,3 +1,5 @@
+require 'boggle_dictionary'
+
 class BoggleChecker
   def self.call(boggle:, query:)
     new(boggle, query).call

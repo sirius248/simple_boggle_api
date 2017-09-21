@@ -1,24 +1,10 @@
-# README
+# Simple Boggle API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Code Climate](https://codeclimate.com/github/kimquy/simple_boggle_api/badges/gpa.svg)](https://codeclimate.com/github/kimquy/simple_boggle_api)
 
-Things you may want to cover:
+[![Build Status](https://travis-ci.org/kimquy/simple_boggle_api.svg?branch=master)](https://travis-ci.org/kimquy/simple_boggle_api)
 
-* Ruby version
+## API
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```ruby
+```
