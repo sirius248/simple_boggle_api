@@ -34,6 +34,21 @@ GET /boggles/current_board
 GET /boggles/check?query={query}
 ```
 
+## Test with Curl
+
+```ruby
+# Test if a word in current board
+curl -H "Content-Type: application/json" -X GET -d '{"query":"tap"}' https://simple-boggle-api.herokuapp.com/boggles/check
+
+
+# Get the current board
+curl -H "Content-Type: application/json" -X GET https://simple-boggle-api.herokuapp.com/boggles/current_board
+
+# Create new boggle
+
+curl -H "Content-Type: application/json" -X POST -d '{"data":"T, A, P, *, E, A, K, S, O, B, R, S, S, *, X, D"}' https://simple-boggle-api.herokuapp.com/boggles
+```
+
 ## Unit tests
 
 ```ruby
@@ -42,7 +57,8 @@ bundle exec rspec
 
 ## Improvement
 * Clean up the algorithm for BoggleChecker
-* Add more meaningfull test case
+* Add more meaningful test case
+* There're still many other thing can be improve. Such as: the API is very simple, or validation or check for bad data submit from user.
 
 ## Screenshots
 ![1](https://user-images.githubusercontent.com/2282642/30710069-89c5a7b6-9f2e-11e7-87b0-d2ec8675ede8.png)
