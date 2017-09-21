@@ -16,6 +16,9 @@ app/services/boggle_checker.rb
 app/services/boggle_finder.rb
 app/services/null_boggle.rb
 lib/boggle_dictionary.rb
+
+# All the unit tests inside the following folder
+spec/
 ```
 
 ## API
