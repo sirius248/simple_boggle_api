@@ -48,7 +48,7 @@ GET /boggles/found_words
 
 # To Play a boggle game
 # The timer will be in second. If user don't pass the timer then the default will be 1 minutes. Or if the user pass timer more than 3 minutes then it will be 3 minutes.
-GET /boggle/play_boggle
+GET /boggle/play_game
 {
   timer: 5
 }
@@ -74,7 +74,7 @@ curl -H "Content-Type: application/json" -X POST -d '{"data":"T, A, P, *, E, A, 
 curl -H "Content-Type: application/json" -X GET https://simple-boggle-api.herokuapp.com/boggles/found_words
 
 # Play game
-curl -H "Content-Type: application/json" -X GET -d '{"timer":"5"}' https://simple-boggle-api.herokuapp.com/boggles/play_boggle
+curl -H "Content-Type: application/json" -X GET -d '{"timer":"5"}' https://simple-boggle-api.herokuapp.com/boggles/play_game
 ```
 
 ## Unit tests
