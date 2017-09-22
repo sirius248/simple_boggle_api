@@ -16,55 +16,66 @@ class BoggleChecker
       query: query
     }
 
-    @word_buffer     = ""
-    @visited_indexes = []
+    @word_buffer = ""
     build_start_indexes
   end
 
   def call
     return response unless BoggleDictionary.exists?(query.downcase)
     start_searching_word_in_board
+    store_found_word_if_any
     response
   end
 
   def start_searching_word_in_board
-    start_indexes.each do |start_position|
-      @visited_indexes = []
-      @queue = [start_position]
-      @word_buffer = ""
+    start_indexes.each do |position|
+      first_value = @board[position[0]][position[1]]
+      @root_node = Node.new(nil, position[0], position[1], first_value)
 
-      next unless find_possible_word?(0)
+      next unless find_possible_word(0, @root_node)
       response[:exist] = true
-      response[:start_position] = start_position
 
       return response
     end
   end
 
-  def find_possible_word?(query_index)
+  def find_possible_word(query_index, node)
+    return false if node.nil?
     if query_index >= query.size
-      @word_buffer.size >= 3 && BoggleDictionary.exists?(@word_buffer.downcase)
+      return true if BoggleDictionary.exists?(node.value.downcase) && node.value == query
+      continue_searching(query_index, node)
     else
-      x, y = @queue.last
+      x, y         = node.position
       current_char = query[query_index]
 
-      if (current_char == @board[x][y] || board[x][y] == "*") && !@visited_indexes.include?(@queue.last)
-        @word_buffer << current_char
-        @visited_indexes << [x, y]
-        @queue.pop
+      if current_char == @board[x][y] || board[x][y] == "*"
+        neighbors_of(x, y).each do |neighbor|
+          next unless node.position != neighbor && !node.ancestors.include?(neighbor)
+          child_value = @board[neighbor[0]][neighbor[1]] == "*" ? query[query_index + 1] : @board[neighbor[0]][neighbor[1]]
+          value = node.value + child_value.to_s
+          node.add_child(Node.new(node, neighbor[0], neighbor[1], value))
+        end
 
-        neighbors_of(x, y).each { |neighbor| @queue = [neighbor] + @queue unless @visited_indexes.include?(neighbor) }
-
-        find_possible_word?(query_index + 1)
+        find_possible_word(query_index + 1, node.children.first)
       else
-        @queue.pop
-        return false if @queue.empty?
-        find_possible_word?(query_index)
+        continue_searching(query_index, node)
       end
     end
   end
 
   private
+
+  def continue_searching(query_index, node)
+    parent = node.parent
+    return false if parent.nil?
+    parent.delete_node(node.position)
+
+    if parent.children.empty?
+      find_possible_word(query_index, parent)
+    else
+      find_possible_word(query_index, parent.children.first)
+    end
+  end
 
   def neighbors_of(i, j)
     neighbors = []
@@ -85,5 +96,9 @@ class BoggleChecker
         @start_indexes << [i, j] if @board[i][j] == query[0]
       end
     end
+  end
+
+  def store_found_word_if_any
+    StoreFoundWord.call(boggle, response)
   end
 end

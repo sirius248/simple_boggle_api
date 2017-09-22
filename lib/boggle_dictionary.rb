@@ -17,6 +17,10 @@ class BoggleDictionary
     def exists?(word)
       instance.data.include?(word)
     end
+
+    def sample
+      instance.data.sample
+    end
   end
 end
 
